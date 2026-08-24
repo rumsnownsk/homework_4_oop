@@ -1,5 +1,8 @@
+import json
+
 from src.category import Category
 from src.product import Product
+from src.utils import read_json, created_objects_from_json
 
 if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
@@ -43,3 +46,12 @@ if __name__ == "__main__":
 
     print(Category.category_count)
     print(Category.product_count)
+
+    # Выполнил реализацию дополнительного задания
+    raw_data = read_json('data/data.json')
+
+    categories, products = created_objects_from_json(raw_data)
+    
+    print(categories)
+    print("\n")
+    print(products)
