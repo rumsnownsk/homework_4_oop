@@ -51,7 +51,7 @@ if __name__ == "__main__":
     raw_data = read_json('data/data.json')
 
     categories, products = created_objects_from_json(raw_data)
-    
+
     print(categories)
     print("\n")
     print(products)
