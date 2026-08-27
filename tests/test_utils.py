@@ -1,12 +1,12 @@
 import json
 import os
 import tempfile
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 import pytest
 
 from src.category import Category
-from src.utils import read_json, created_objects_from_json
+from src.utils import created_objects_from_json, read_json
 
 
 @pytest.fixture
@@ -16,36 +16,20 @@ def json_data() -> List[Dict[str, Any]]:
             "name": "Фрукты",
             "description": "Спелые фрукты",
             "products": [
-                {
-                    "name": "Яблоко",
-                    "description": "Зелёное",
-                    "price": 80.0,
-                    "quantity": 10
-                },
-                {
-                    "name": "Банан",
-                    "description": "Жёлтый",
-                    "price": 60.0,
-                    "quantity": 20
-                }
-            ]
+                {"name": "Яблоко", "description": "Зелёное", "price": 80.0, "quantity": 10},
+                {"name": "Банан", "description": "Жёлтый", "price": 60.0, "quantity": 20},
+            ],
         },
         {
             "name": "Молочка",
             "description": "Молочные продукты",
-            "products": [
-                {
-                    "name": "Молоко",
-                    "description": "Пастеризованное",
-                    "price": 90.0,
-                    "quantity": 30
-                }
-            ]
-        }
+            "products": [{"name": "Молоко", "description": "Пастеризованное", "price": 90.0, "quantity": 30}],
+        },
     ]
 
+
 def test_read_json(json_data: List[Dict[str, Any]]):
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False, encoding='utf-8') as tmp_file:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8") as tmp_file:
         json.dump(json_data, tmp_file)
         tmp_path = tmp_file.name
 
@@ -61,6 +45,7 @@ def test_read_json(json_data: List[Dict[str, Any]]):
     result_no_file = read_json("no_file.json")
     assert result_no_file == []
 
+
 def test_read_json_invalid_json():
     with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8") as tmp:
         tmp.write("{ невалидный json }")
@@ -71,6 +56,7 @@ def test_read_json_invalid_json():
         assert result == []
     finally:
         os.unlink(tmp_path)
+
 
 def test_read_json_not_list():
     not_list = {"data": "not list"}
@@ -84,10 +70,11 @@ def test_read_json_not_list():
     finally:
         os.unlink(tmp_path)
 
+
 def test_created_objects_success(json_data: List[Dict[str, Any]]):
     categories, products = created_objects_from_json(json_data)
 
-     # Проверяем типы
+    # Проверяем типы
     assert isinstance(categories, list)
     assert isinstance(products, list)
 
