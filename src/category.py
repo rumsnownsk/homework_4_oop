@@ -10,7 +10,7 @@ class Category:
         self.description = description
         self.__products = products if products else []
 
-        # задаём кол-во Продуктов у атрибута экземпляра класса Category
+        # задаём кол-во Продуктов у атрибута экземпляра Category
         self.product_count = len(self.__products)
 
         # задаём кол-во Продуктов у атрибута класса Category
@@ -37,3 +37,7 @@ class Category:
     @property
     def products(self):
         return [f"{p.name}, {p.price} руб. Остаток: {p.quantity} шт." for p in self.__products]
+
+    def __str__(self):
+        count_products_by_category = sum([item.quantity for item in self.__products])
+        return f"{self.name}, количество продуктов: {count_products_by_category} шт."
