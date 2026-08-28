@@ -38,3 +38,19 @@ def created_objects_from_json(raw_data):
         categories.append(category_obj)
 
     return categories, products
+
+class ProductsByCategory:
+    def __init__(self, category: Category):
+        self.i = 0
+        self.category = category
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.i < self.category.product_count:
+            product = self.category.products[self.i]
+            self.i += 1
+            return product
+        else:
+            raise StopIteration
