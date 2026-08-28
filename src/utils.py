@@ -39,12 +39,14 @@ def created_objects_from_json(raw_data):
 
     return categories, products
 
+
 class ProductsByCategory:
     def __init__(self, category: Category):
         self.i = 0
         self.category = category
 
     def __iter__(self):
+        self.i = 0
         return self
 
     def __next__(self):

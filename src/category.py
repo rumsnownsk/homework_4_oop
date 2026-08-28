@@ -19,7 +19,6 @@ class Category:
         # задаём общее кол-во Категорий
         Category.category_count += 1
 
-
     def add_product(self, new_product: Product):
         if not new_product:
             raise ValueError("Ошибка. не передан новый продукт")
