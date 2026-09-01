@@ -80,3 +80,8 @@ def test_multiple_adds_and_counts(mock_print):
 
     products_list = cat.products
     assert len(products_list) == 2
+
+    with pytest.raises(TypeError) as exc_info:
+        Category("Выпечка", "Описание").add_product("не продукт")
+    assert "Продукт должен быть экземпляром класса <Product>" in str(exc_info.value)
+

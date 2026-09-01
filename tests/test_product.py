@@ -2,7 +2,9 @@ from unittest.mock import patch
 
 import pytest
 
+from src.category import Category
 from src.product import Product
+from src.smartphone import Smartphone
 
 
 @pytest.fixture(autouse=True)
@@ -95,3 +97,11 @@ def test_storage_sync_on_price_change():
     p.price = 60
     stored = Product.all_products()
     assert stored[0]["price"] == 60.0
+
+
+def test_summ_prices(smartphone_1, smartphone_2, grass_1):
+    print(smartphone_1 + smartphone_2)
+    assert smartphone_1 + smartphone_2 == 1800000.0
+
+    with pytest.raises(TypeError) as exc_info:
+        assert smartphone_1 + grass_1
