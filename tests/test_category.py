@@ -84,4 +84,3 @@ def test_multiple_adds_and_counts(mock_print):
     with pytest.raises(TypeError) as exc_info:
         Category("Выпечка", "Описание").add_product("не продукт")
     assert "Продукт должен быть экземпляром класса <Product>" in str(exc_info.value)
-

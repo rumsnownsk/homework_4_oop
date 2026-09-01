@@ -42,6 +42,7 @@ def category_2():
         ],
     )
 
+
 @pytest.fixture()
 def smartphone_1():
     return Smartphone(
@@ -52,8 +53,9 @@ def smartphone_1():
         efficiency=95.5,
         model="S23 Ultra",
         memory=256,
-        color="Серый"
+        color="Серый",
     )
+
 
 @pytest.fixture()
 def smartphone_2():
@@ -65,17 +67,10 @@ def smartphone_2():
         efficiency=95.5,
         model="S23 Ultra",
         memory=256,
-        color="Серый"
+        color="Серый",
     )
+
 
 @pytest.fixture()
 def grass_1():
-    return LawnGrass(
-        "Газонная трава",
-        "Элитная трава для газона",
-        500.0,
-        20,
-        "Россия",
-        "7 дней",
-        "Зеленый"
-    )
+    return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
