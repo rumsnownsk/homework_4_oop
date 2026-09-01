@@ -15,6 +15,12 @@ class Product:
         if not self._update_existing_product():
             self._add_new_product()
 
+    def __str__(self):
+        return f"{self.name}, {int(self._price)} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        return self._price * self.quantity + other._price * other.quantity
+
     def _update_existing_product(self) -> bool:
         for product in Product._list_products:
             if product["name"] == self.name:

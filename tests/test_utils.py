@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 import pytest
 
 from src.category import Category
-from src.utils import created_objects_from_json, read_json
+from src.utils import created_objects_from_json, read_json, ProductsByCategory
 
 
 @pytest.fixture
@@ -90,3 +90,19 @@ def test_created_objects_success(json_data: List[Dict[str, Any]]):
 
     assert isinstance(cat2, Category)
     assert cat2.name == "Молочка"
+
+
+def test_iterates_all_products(category_2):
+    iterator = ProductsByCategory(category_2)
+    result = list(iterator)
+
+    assert len(result) == 3
+
+    expected_strings = [
+        f"помидор, {float(50)} руб. Остаток: 10 шт.",
+        f"редис, {float(20)} руб. Остаток: 100 шт.",
+        f"редис мытый, {float(20)} руб. Остаток: 100 шт."
+    ]
+
+    for i, product_str in enumerate(result):
+        assert product_str == expected_strings[i]
