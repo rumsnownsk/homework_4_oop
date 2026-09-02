@@ -19,7 +19,10 @@ class Product:
         return f"{self.name}, {int(self._price)} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
-        return self._price * self.quantity + other._price * other.quantity
+        if type(self) is type(other):
+            return self._price * self.quantity + other._price * other.quantity
+        else:
+            raise TypeError("Складывать можно только товары одинаковой категории")
 
     def _update_existing_product(self) -> bool:
         for product in Product._list_products:

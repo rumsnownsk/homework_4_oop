@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 import pytest
 
 from src.category import Category
-from src.utils import created_objects_from_json, read_json, ProductsByCategory
+from src.utils import ProductsByCategory, created_objects_from_json, read_json
 
 
 @pytest.fixture
@@ -101,7 +101,7 @@ def test_iterates_all_products(category_2):
     expected_strings = [
         f"помидор, {float(50)} руб. Остаток: 10 шт.",
         f"редис, {float(20)} руб. Остаток: 100 шт.",
-        f"редис мытый, {float(20)} руб. Остаток: 100 шт."
+        f"редис мытый, {float(20)} руб. Остаток: 100 шт.",
     ]
 
     for i, product_str in enumerate(result):

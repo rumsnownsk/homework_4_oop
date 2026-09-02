@@ -20,6 +20,9 @@ class Category:
         Category.category_count += 1
 
     def add_product(self, new_product: Product):
+        if not isinstance(new_product, Product):
+            raise TypeError("Продукт должен быть экземпляром класса <Product>")
+
         if not new_product:
             raise ValueError("Ошибка. не передан новый продукт")
         self.__products.append(new_product)
