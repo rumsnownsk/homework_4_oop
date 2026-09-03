@@ -1,6 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List
-
 
 
 class BaseProduct(ABC):
@@ -21,5 +19,3 @@ class BaseProduct(ABC):
     @abstractmethod
     def all_products(cls):
         pass
-
-

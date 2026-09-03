@@ -3,7 +3,7 @@ from src.product import Product
 
 
 class Order(BaseEntity):
-    def __init__(self, name, product: Product, quantity: int, description:str = ""):
+    def __init__(self, name, product: Product, quantity: int, description: str = ""):
         # строчкой super перетягиваем поля от Родителя
         super().__init__(name, description)
 
@@ -11,7 +11,6 @@ class Order(BaseEntity):
         self.product = product
         self.quantity = quantity
         self._total_coast = self._calculate_total()
-
 
     def _calculate_total(self) -> int | float:
         return self.quantity * self.product.price
