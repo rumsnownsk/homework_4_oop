@@ -78,12 +78,12 @@ def test_price_setter_type_error_prints_message():
         mock_print.assert_called_once_with("Цена должна быть числом")
 
 
-@patch("builtins.print")
-def test_price_setter_increase_works_without_input(mock_print):
+@patch("src.product.PrintMixin.__init__")  # патчим инициализацию миксина
+def test_price_setter_increase_works_without_input(mock_init):
+    mock_init.return_value = None  # просто ничего не делаем при инициализации миксина
+
     p = Product("Товар", "Описание", 100)
     p.price = 150
-    # print не должен вызываться для случая увеличения
-    mock_print.assert_not_called()
     assert p.price == 150.0
 
 

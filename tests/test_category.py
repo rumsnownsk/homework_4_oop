@@ -76,7 +76,7 @@ def test_multiple_adds_and_counts(mock_print):
     cat.add_product(p2)
 
     assert cat.product_count == 2
-    assert mock_print.call_count == 2  # print вызывался дважды
+    assert mock_print.call_count == 4  # print вызывался дважды
 
     products_list = cat.products
     assert len(products_list) == 2

@@ -1,13 +1,13 @@
+from src.base_entity import BaseEntity
 from src.product import Product
 
 
-class Category:
+class Category(BaseEntity):
     product_count = 0
     category_count = 0
 
     def __init__(self, name, description, products=None):
-        self.name = name
-        self.description = description
+        super().__init__(name, description)
         self.__products = products if products else []
 
         # задаём кол-во Продуктов у атрибута экземпляра Category
