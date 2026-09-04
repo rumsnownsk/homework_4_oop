@@ -84,3 +84,13 @@ def test_multiple_adds_and_counts(mock_print):
     with pytest.raises(TypeError) as exc_info:
         Category("Выпечка", "Описание").add_product("не продукт")
     assert "Продукт должен быть экземпляром класса <Product>" in str(exc_info.value)
+
+
+def test_middle_price(category_2):
+    middle_price = category_2.middle_price()
+    assert middle_price == 30.0
+
+
+def test_middle_price_empty_category():
+    cat = Category("категория", "", [])
+    assert cat.middle_price() == 0

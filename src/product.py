@@ -10,12 +10,11 @@ class Product(BaseProduct, PrintMixin):
 
     def __init__(self, name, description, price: float | int = 0.0, quantity: int = 0):
 
+        if quantity <= 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+
         # Вызываем метод базового класса
         super().__init__(name, description, price, quantity)
-        # self.name = name
-        # self.description = description
-        # self._price = price
-        # self.quantity = quantity
 
         if not self._update_existing_product():
             self._add_new_product()
