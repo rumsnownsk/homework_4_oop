@@ -43,3 +43,16 @@ class Category(BaseEntity):
     def __str__(self):
         count_products_by_category = sum([item.quantity for item in self.__products])
         return f"{self.name}, количество продуктов: {count_products_by_category} шт."
+
+    def middle_price(self):
+        total_price = sum([el.price for el in self.__products])
+        count_products = len(self.__products)
+
+        try:
+            res = round(float(total_price / count_products), 2)
+        except ZeroDivisionError:
+            return 0
+        except Exception as e:
+            return f"непредвиденная ошибка:{e}"
+
+        return res

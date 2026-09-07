@@ -29,6 +29,12 @@ def test_create_product():
     assert p.quantity == 10
 
 
+def test_create_product_empty_quantity():
+    with pytest.raises(ValueError) as e_info:
+        Product("Продукт с пустым количеством", "", 1, 0)
+        assert "Товар с нулевым количеством" in str(e_info.value)
+
+
 def test_new_product_filters_extra_fields():
     data = {
         "name": "Молоко",
@@ -45,7 +51,7 @@ def test_new_product_filters_extra_fields():
 @patch("builtins.input", return_value="y")
 @patch("builtins.print")
 def test_price_setter_decrease_confirmed(mock_print, mock_input):
-    p = Product("Товар", "Описание", 100)
+    p = Product("Товар", "Описание", 100, 1)
     p.price = 50  # цена ниже — должен спросить и принять
 
     # Проверяем, что спросили
@@ -59,7 +65,7 @@ def test_price_setter_decrease_confirmed(mock_print, mock_input):
 @patch("builtins.input", return_value="n")
 @patch("builtins.print")
 def test_price_setter_decrease_rejected(mock_print, mock_input):
-    p = Product("Товар", "Описание", 100)
+    p = Product("Товар", "Описание", 100, 1)
     p.price = 50
 
     mock_print.assert_any_call(
@@ -72,7 +78,7 @@ def test_price_setter_decrease_rejected(mock_print, mock_input):
 
 
 def test_price_setter_type_error_prints_message():
-    p = Product("Товар", "Описание", 100)
+    p = Product("Товар", "Описание", 100, 1)
     with patch("builtins.print") as mock_print:
         p.price = "не число"
         mock_print.assert_called_once_with("Цена должна быть числом")
@@ -82,7 +88,7 @@ def test_price_setter_type_error_prints_message():
 def test_price_setter_increase_works_without_input(mock_init):
     mock_init.return_value = None  # просто ничего не делаем при инициализации миксина
 
-    p = Product("Товар", "Описание", 100)
+    p = Product("Товар", "Описание", 100, 1)
     p.price = 150
     assert p.price == 150.0
 
